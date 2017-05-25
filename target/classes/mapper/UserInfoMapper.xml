@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.springtest.dao.UserInfoDao">
+	<!-- 为了DAO接口方法提供sql语句配置 -->
+	
+	<insert id="insert">
+		insert into 
+			User_Info(name,age,pwd)
+		values(#{name},#{age},#{pwd})
+	</insert>
+	
+	<select id="getById" resultType="me.springtest.entity.UserInfo">
+		select 
+			id as id,
+			name as name,
+			age as age,
+			pwd as pwd
+		from
+			User_info
+		where 
+			id = #{id}
+	</select>
+	
+	
+</mapper>
