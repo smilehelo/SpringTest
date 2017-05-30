@@ -35,6 +35,7 @@ public class TestCtr {
 	@RequestMapping("/test1")
 	public String Test(){
 		String result = testSer1.test();
+		int i = 16/0;
 		return result;
 	}
 	

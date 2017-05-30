@@ -28,5 +28,6 @@ public class TestAOP {
 	public void testAfter(){
 		System.out.println("after");
 	}
+	
 
 }
