@@ -17,12 +17,13 @@ public class TestChangeAOP {
 	
 	@Around("pointcut()")
 	public Object around(ProceedingJoinPoint jp) throws Throwable{
-		System.out.println("ÇĞÃæ¿ªÊ¼£¡£¡");
+		System.out.println("ä¿®æ”¹ä¹‹å‰");
 		Object[] os = jp.getArgs();
+		System.out.println(os[0] instanceof Singleton);
 		Singleton singleton = (Singleton)os[0];
-		System.out.println("²ÎÊıÎª" + singleton.getName() + "**" + singleton.getNum());
-		System.out.println("¿ªÊ¼ĞŞ¸Ä£¡");
-		singleton.setName("ÎÒÁË¸öÈ¥");
+		System.out.println("å‚æ•°ä¸ºÎª" + singleton.getName() + "**" + singleton.getNum());
+		System.out.println("å¼€å§‹ä¿®æ”¹å‚æ•°");
+		singleton.setName("æˆ‘äº†ä¸ªå»");
 		singleton.setNum(123);
 		os[0] = (Object)singleton;
 		Object result = jp.proceed(os);

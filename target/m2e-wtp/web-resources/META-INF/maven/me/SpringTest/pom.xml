@@ -179,6 +179,15 @@
            <scope>system</scope>
            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/IocTest.jar</systemPath>
      </dependency>
+     
+     <!-- hibernate的参数校验包 -->
+     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>5.4.1.Final</version>
+	</dependency>
+     
 
   </dependencies>
 	

@@ -1,13 +1,18 @@
 package me.springtest.entity;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class UserInfo {
 	
 	private String id;
-	
+	@NotNull
+	@Size(min=5,max=100)
 	private String name;
-	
+
 	private Integer age;
-	
+	@NotNull
+	@Size(min=5,max=100)
 	private String pwd;
 
 	public String getId() {

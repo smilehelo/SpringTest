@@ -12,7 +12,7 @@ public class TestAOP {
 	
 	
 	/**
-	 *  ÉèÖÃÇĞµã
+	 *  å£°æ˜åˆ‡é¢
 	 */
 	@Pointcut("execution(* me.springtest.service.TestSer.test(..))")
 	public void pointcut(){};
