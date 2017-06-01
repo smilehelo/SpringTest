@@ -2,6 +2,7 @@ package me.springtest.controller;
 
 import junit.textui.ResultPrinter;
 import me.springtest.entity.Singleton;
+import me.springtest.service.TestChangeSer;
 import me.springtest.service.TestSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +31,9 @@ public class TestCtr {
 	@Autowired
 	private IocTest1 one;
 	
+	@Autowired
+	private TestChangeSer testChangeSer;
+	
 
 	
 	@RequestMapping("/test1")
@@ -53,6 +57,12 @@ public class TestCtr {
 	@RequestMapping("/test4")
 	public void Test4(){
 		System.out.println(one.getName());
+	}
+	
+	@RequestMapping("/test5")
+	public void Test5(){
+		String result = testChangeSer.test(singleton);
+		System.out.println(result);
 	}
 	
 	
