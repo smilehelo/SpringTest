@@ -21,7 +21,7 @@ public class TestChangeAOP {
 		Object[] os = jp.getArgs();
 		System.out.println(os[0] instanceof Singleton);
 		Singleton singleton = (Singleton)os[0];
-		System.out.println("参数为Ϊ" + singleton.getName() + "**" + singleton.getNum());
+		System.out.println("参数为" + singleton.getName() + "**" + singleton.getNum());
 		System.out.println("开始修改参数");
 		singleton.setName("我了个去");
 		singleton.setNum(123);
