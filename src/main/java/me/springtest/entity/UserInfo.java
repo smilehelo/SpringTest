@@ -6,12 +6,12 @@ import javax.validation.constraints.Size;
 public class UserInfo {
 	
 	private String id;
-	@NotNull
+	@NotNull(message="{userinfo.name}")
 	@Size(min=5,max=100)
 	private String name;
 
 	private Integer age;
-	@NotNull
+	@NotNull(message="12121212121212121")
 	@Size(min=5,max=100)
 	private String pwd;
 

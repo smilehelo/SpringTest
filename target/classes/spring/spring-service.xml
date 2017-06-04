@@ -37,4 +37,11 @@
         	<property name="name" value="hehe" />
         	<property name="type" value="2" />
         </bean>
+        
+		<!-- multipartFile -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+
+
+        
+        
 </beans>

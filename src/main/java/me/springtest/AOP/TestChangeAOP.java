@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import me.springtest.entity.Singleton;
 
 @Aspect
-@Component
+//@Component
 public class TestChangeAOP {
 
 	@Pointcut("execution(* me.springtest.service.TestChangeSer.test(..))")

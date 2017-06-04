@@ -1,11 +1,15 @@
 package me.springtest.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import me.springtest.entity.UserInfo;
 import me.springtest.service.UserInfoSer;
 
@@ -29,10 +33,14 @@ public class UserInfoCtr {
 	}
 	
 	@RequestMapping("/validator")
-	public void validator(@Valid UserInfo userinfo,Errors error){
-		if(error.hasErrors()){
-			System.out.println("hehe");
+	public void validator(@Valid UserInfo userinfo,BindingResult bindingResult){
+		if(bindingResult.hasErrors()){
+			List<ObjectError> lists = bindingResult.getAllErrors();
+			System.out.println(lists.size());
+			for(ObjectError one : lists){
+				System.out.println(one.getDefaultMessage());	
+			}
 		}
-		System.out.println(userinfo.getName() + userinfo.getPwd());
+//		System.out.println(userinfo.getName() + userinfo.getPwd());
 	}
 }
