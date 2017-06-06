@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans   
              http://www.springframework.org/schema/beans/spring-beans.xsd  
          http://www.springframework.org/schema/context   
-         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+         http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- 配置整合Mybatis过程 -->
 	
 	<!-- 1:配置数据库相关参数 -->
