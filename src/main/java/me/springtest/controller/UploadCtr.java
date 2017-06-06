@@ -19,9 +19,14 @@ public class UploadCtr {
 	
 	
 	@RequestMapping("/upload")
-	public void upload(@RequestPart("upload")MultipartFile upload) throws IllegalStateException, IOException{
-		System.out.println(upload.getOriginalFilename());
-		System.out.println(upload.getSize());
-		upload.transferTo(new File(System.currentTimeMillis()+upload.getOriginalFilename()));
+	public void upload(@RequestPart("upload")MultipartFile[] upload) throws IllegalStateException, IOException{
+		System.out.println(upload.length);
+		for(MultipartFile one : upload){
+			System.out.println(one.getOriginalFilename());
+			System.out.println(one.getSize());
+			one.transferTo(new File(System.currentTimeMillis()+one.getOriginalFilename()));
+		}
+		
+
 	}
 }
