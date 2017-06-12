@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import me.springtest.entity.Singleton;
 import me.springtest.entity.UserInfo;
 import me.springtest.service.UserInfoSer;
 
@@ -42,5 +45,27 @@ public class UserInfoCtr {
 			}
 		}
 //		System.out.println(userinfo.getName() + userinfo.getPwd());
+	}
+	
+	@RequestMapping("login")
+	public String test(){
+		return "login";
+	}
+	
+	
+	@RequestMapping("success")
+	@ResponseBody
+	public Singleton interceptor(){
+		Singleton res = new Singleton();
+		res.setName("success");
+		return res;
+	}
+	
+	@RequestMapping(value="fail",method=RequestMethod.POST)
+	@ResponseBody
+	public Singleton fail(){
+		Singleton res = new Singleton();
+		res.setName("fail");
+		return res;
 	}
 }
