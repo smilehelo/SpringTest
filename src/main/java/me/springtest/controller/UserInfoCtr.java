@@ -54,18 +54,12 @@ public class UserInfoCtr {
 	
 	
 	@RequestMapping("success")
-	@ResponseBody
-	public Singleton interceptor(){
-		Singleton res = new Singleton();
-		res.setName("success");
-		return res;
+	public String success(){
+		return "success";
 	}
 	
-	@RequestMapping(value="fail",method=RequestMethod.POST)
-	@ResponseBody
-	public Singleton fail(){
-		Singleton res = new Singleton();
-		res.setName("fail");
-		return res;
+	@RequestMapping("fail")
+	public String fail(){
+		return "fail";
 	}
 }

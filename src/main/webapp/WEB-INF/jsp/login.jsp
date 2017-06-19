@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Login</h1>
-   <form action="login" method="post">
+   <form action="logintest" method="post">
       <table>
          <tr>
             <td>用户名：</td>
@@ -17,6 +17,10 @@
          <tr>
             <td>密码：</td>
             <td><input type="password" name="password"/></td>
+         </tr>
+         <tr>
+            <td>Remember_me</td>
+            <td><input type="checkbox" name="remember-me"/></td>
          </tr>
          <tr>
             <td colspan="2" align="center">

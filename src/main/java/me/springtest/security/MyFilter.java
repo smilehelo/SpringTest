@@ -9,7 +9,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,20 +42,25 @@ public class MyFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		if(request.getParameter("username") == null){
-			Enumeration<String> e = request.getParameterNames();
-			while(e.hasMoreElements()){
-				String s = e.nextElement();
-				System.out.println(s);
-			}
+		String username = "";
+		boolean isFalse = false;
+		try{
+			username = SecurityContextHolder.getContext().getAuthentication().getName();
+			Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			System.out.println("username***" + username);
+			System.out.println("Object***" + o);
+		} catch (NullPointerException e){
+			isFalse = true;
+			System.out.println(isFalse);
+		}
+		if(isFalse){
 			response.setContentType("application/json;charset=UTF-8");
 			Singleton res = new Singleton();
-			res.setName("success fail");
+			res.setName("no user");
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			mapper.writeValue(response.getWriter(), res);
 		}else{
-			System.out.println("hava user*****" + request.getParameter("username").toString());
 			chain.doFilter(request, response);
 		}
 		

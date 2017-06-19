@@ -6,34 +6,62 @@
           http://www.springframework.org/schema/beans/spring-beans.xsd
           http://www.springframework.org/schema/security
           http://www.springframework.org/schema/security/spring-security.xsd">
-          
-<!-- 	<security:http pattern="userinfo/test" security="none" /> -->
-	<security:http pattern="/userinfo/success" security="none"/>
-          
+   
+    <!-- 不需要限制的资源 -->
+	<security:http pattern="/userinfo/login" security="none" />		
+	
+	<!-- 启动spring security的Filter -->
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/**" />
+		<!-- 禁用匿名访问 -->
+		<security:anonymous enabled="false" />
+		<!-- 开启csrf -->
 		<security:csrf disabled="true"/>
 		<security:headers>
 	        <security:frame-options policy="SAMEORIGIN"/>
 	        <security:cache-control disabled="true"/>
 	        <security:content-type-options disabled="true"/>
 		</security:headers>
+		
+		<!-- 设置自定义的登陆界面，自定义登录成功与失败的设置 -->
+		<security:form-login login-page="/jsp/login.jsp" 
+							 username-parameter="username" 
+							 password-parameter="password" 
+							 login-processing-url="/userinfo/logintest" 
+							 authentication-success-handler-ref="loginAuthenticationSuccesss" 
+							 authentication-failure-handler-ref="loginAuthenticationFailure" />
+	    <!-- 自定义登出的url -->
+	    <security:logout logout-url="/userinfo/loginout" logout-success-url="/userinfo/login" />
+	   
 	    <security:session-management> 
 	    	<security:concurrency-control max-sessions="1" />
 	    </security:session-management>
+	    
+	    <!-- remember-me功能 -->
+	    <security:remember-me remember-me-parameter="remember-me" />
+	    
+	    <!-- 自定义的Filter -->
 		<security:custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR" />
 	</security:http> 
 	
 	
-
+	<!-- 自定义的用户认证 -->
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="myUserDetailService" /> 
+		<security:authentication-provider ref="authenticationProvider" /> 
 	</security:authentication-manager>
 	
 	<bean id="myUserDetailService" class="me.springtest.security.MyUserDetailService" />
 	
 	<bean id="myFilter" class="me.springtest.security.MyFilter" />
-
 	
+	<!-- 登录成功的bean -->
+	<bean id="loginAuthenticationSuccesss" class="me.springtest.security.LoginAuthenticationSuccesssHandler" />
+	
+	<!-- 登录失败的bean -->
+	<bean id="loginAuthenticationFailure" class="me.springtest.security.LoginAuthenticationFailureHandler" />
+	
+	<bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">  
+	    <property name="hideUserNotFoundExceptions" value="false" />  
+	    <property name="userDetailsService" ref="myUserDetailService" />   
+	</bean>  
 
 </beans>
